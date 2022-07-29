@@ -1,0 +1,16 @@
+{
+    "Name": "umami",
+    "Version": "1.36.0",
+    "Home": "https://<homepage>/",
+    "Maintainer": "wangjiahua wangjiahua@easycorp.ltd",
+    "GitUrl": "https://github.com/umami-software/umami",
+    "DockerfileUrl": "https://github.com/quicklyon/umami-docker",
+    "InstallDocUrl": "https://umami.is/docs/install",
+    "Docker": {
+        "Name": "umami",
+        "OS": "alpine",
+        "ImageOS": "alpine:3.15",
+        "Repo": "https://hub.docker.com/r/easysoft/umami",
+        "TagUrl": "https://hub.docker.com/r/easysoft/umami/tags/"
+    }
+}

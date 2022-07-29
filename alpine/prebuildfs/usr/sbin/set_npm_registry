@@ -1,0 +1,12 @@
+#!/bin/sh
+set -e
+set -u
+
+# set npm registry by location.
+MIRROR=${MIRROR:-false}
+
+if [ "$MIRROR" = "true" ];then
+    npm config set registry http://mirrors.cloud.tencent.com/npm/
+    npm config get registry # show registry
+fi
+
