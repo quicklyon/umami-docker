@@ -1,7 +1,7 @@
 {
     "Name": "umami",
     "Version": "1.36.0",
-    "Home": "https://<homepage>/",
+    "Home": "https://umami.is/",
     "Maintainer": "wangjiahua wangjiahua@easycorp.ltd",
     "GitUrl": "https://github.com/umami-software/umami",
     "DockerfileUrl": "https://github.com/quicklyon/umami-docker",
