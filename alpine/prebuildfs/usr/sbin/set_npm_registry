@@ -6,7 +6,9 @@ set -u
 MIRROR=${MIRROR:-false}
 
 if [ "$MIRROR" = "true" ];then
-    npm config set registry http://mirrors.cloud.tencent.com/npm/
-    npm config get registry # show registry
+    npm config set registry https://mirrors.cloud.tencent.com/npm/ # Tencent
+    #npm config set registry https://registry.npmmirror.com # Ali
+    #npm config set registry  https://repo.huaweicloud.com/repository/npm/ # HuaWei
 fi
 
+npm config get registry # show registry

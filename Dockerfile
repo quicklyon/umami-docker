@@ -6,22 +6,25 @@ ENV OS_ARCH="amd64" \
 
 COPY alpine/prebuildfs /
 
+ARG VERSION
 ARG IS_CHINA="true"
+ENV MIRROR=${IS_CHINA}
 
 # Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
-RUN install_packages libc6-compat
-RUN set_npm_registry
+RUN install_packages libc6-compat git
 
 WORKDIR /app
-COPY package.json yarn.lock ./
-RUN yarn install --frozen-lockfile
+RUN git clone --branch v${VERSION} https://github.com/umami-software/umami.git /app
+#COPY package.json yarn.lock ./
+RUN set_npm_registry && yarn install --frozen-lockfile
 
 # Rebuild the source code only when needed
 FROM node:16-alpine AS builder
 COPY alpine/prebuildfs /
 WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
-COPY . .
+#COPY --from=deps /app/node_modules ./node_modules
+COPY --from=deps /app .
+#COPY . .
 
 ARG MYSQL_HOST
 ARG MYSQL_PORT
