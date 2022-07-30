@@ -6,11 +6,11 @@
 - 通过 [渠成软件百宝箱](https://umami.is/docs/install) 一键安装 **umami**
 - [Dockerfile 源码](https://github.com/quicklyon/umami-docker)
 - [umami 源码](https://github.com/umami-software/umami)
-- [umami 官网](https://<homepage>/)
+- [umami 官网](https://umami.is/)
 
 ## 一、关于 umami
 
-[Umami](https://umami.is/)Umami 是一个开源的、注重保护隐私、可以替代谷歌分析的自托管的网站分析解决方案。
+[Umami](https://umami.is/) 是一个开源的、注重保护隐私的、可以替代谷歌分析的自托管的网站分析解决方案。
 
 ### 尊重数据隐私
 
@@ -30,7 +30,9 @@ Umami 易于使用和理解，无需运行复杂的报告。Umami 只收集您�
 
 Umami 致力于开源开发。让您对完全透明、经过实战测试和社区支持的产品充满信心。
 
-umami官网：[https://<homepage>/](https://<homepage>/)
+![screenshots](.template/feature-website-stats.png)
+
+umami官网：[https://umami.is/](https://umami.is/)
 
 
 <!-- 这里写应用的【附加信息】 -->
@@ -98,7 +100,7 @@ services:
   umami:
   ...
     volumes:
-      - /path/to/gogs-persistence:/data
+      - /path/to/umami-persistence:/data
   ...
 ```
 
@@ -126,7 +128,7 @@ make run
 make ps
 
 # 查看服务日志
-docker-compose logs -f gogs
+docker-compose logs -f umami
 
 ```
 

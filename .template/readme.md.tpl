@@ -60,7 +60,7 @@ services:
   {{APP_NAME}}:
   ...
     volumes:
-      - /path/to/gogs-persistence:/data
+      - /path/to/umami-persistence:/data
   ...
 ```
 
@@ -80,7 +80,7 @@ make run
 make ps
 
 # 查看服务日志
-docker-compose logs -f gogs
+docker-compose logs -f umami
 
 ```
 

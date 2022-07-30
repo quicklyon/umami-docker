@@ -17,3 +17,5 @@ Umami 易于使用和理解，无需运行复杂的报告。Umami 只收集您�
 ### 代码开源
 
 Umami 致力于开源开发。让您对完全透明、经过实战测试和社区支持的产品充满信心。
+
+![screenshots](.template/feature-website-stats.png)
