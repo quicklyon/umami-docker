@@ -38,6 +38,10 @@ RUN adduser --system --uid 1001 nextjs
 RUN yarn global add prisma --registry https://registry.npmmirror.com --verbose
 RUN yarn add prompts npm-run-all dotenv --registry https://registry.npmmirror.com --verbose
 
+ENV OS_ARCH="amd64" \
+    OS_NAME="alpine-3.15"
+RUN install_packages mysql-client
+
 # You only need to copy next.config.js if you are NOT using the default configuration
 COPY --from=builder /apps/umami/next.config.js .
 COPY --from=builder /apps/umami/public ./public
@@ -59,6 +63,5 @@ ENV PORT 3000
 CMD ["yarn", "start-docker"]
 
 
-#CMD ["sleep","10000"]
 
 #ENTRYPOINT ["/usr/bin/entrypoint.sh"]

@@ -13,17 +13,14 @@ services:
     volumes:
       - 'db:/var/lib/mysql'
     environment:
-      - MYSQL_DB=umami
-      - MYSQL_USER=umami
-      - MYSQL_PASSWORD=pass4Umami
-      - MYSQL_ROOT_PASSWORD=pass4Umami
+      - MYSQL_DATABASE=umami
+      - MYSQL_ROOT_PASSWORD=uQu3Iet9biep8ahgaiz6Aex1
     networks:
       - net
     restart: always
 
   umami:
     image: hub.qucheng.com/app/umami:${TAG}
-    #image: ghcr.io/umami-software/umami:mysql-latest
     container_name: umami
     ports:
       - '8000:3000'
@@ -35,10 +32,10 @@ services:
       MYSQL_HOST: mysql
       MYSQL_PORT: 3306
       MYSQL_DB: umami
-      MYSQL_USER: umami
-      MYSQL_PASSWORD: pass4Umami
+      MYSQL_USER: root
+      MYSQL_PASSWORD: uQu3Iet9biep8ahgaiz6Aex1
       DATABASE_TYPE: mysql
-      DATABASE_URL: mysql://root:pass4Umami@mysql:3306/umami
+      DATABASE_URL: mysql://root:uQu3Iet9biep8ahgaiz6Aex1@mysql:3306/umami
     networks:
       - net
     restart: always
