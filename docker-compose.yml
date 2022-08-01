@@ -14,7 +14,7 @@ services:
       - 'db:/var/lib/mysql'
     environment:
       - MYSQL_DB=umami
-      - MYSQL_USER=root
+      - MYSQL_USER=umami
       - MYSQL_PASSWORD=pass4Umami
       - MYSQL_ROOT_PASSWORD=pass4Umami
     networks:
@@ -25,7 +25,7 @@ services:
     image: hub.qucheng.com/app/umami:${TAG}
     container_name: umami
     ports:
-      - '3000:3000'
+      - '8000:3000'
     volumes:
       - 'data:/data'
     depends_on:
@@ -34,10 +34,10 @@ services:
       MYSQL_HOST: mysql
       MYSQL_PORT: 3306
       MYSQL_DB: umami
-      MYSQL_USER: root
+      MYSQL_USER: umami
       MYSQL_PASSWORD: pass4Umami
       DATABASE_TYPE: mysql
-      DATABASE_URL: mysql://root:pass4Umami@mysql:3306/umami
+      DATABASE_URL: mysql://$MYSQL_USER:$MYSQL_PASSWORD@$MYSQL_HOST:3306/$MYSQL_DB
     networks:
       - net
     restart: always
