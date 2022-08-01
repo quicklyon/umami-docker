@@ -20,7 +20,7 @@ RUN mkdir tmp \
 
 RUN cd /apps/umami \
     && rm -rf yarn.lock \
-    && yarn install --verbose --network-concurrency 20 --registry https://registry.npmmirror.com
+    && yarn install --verbose --registry https://registry.npmmirror.com
 
 ENV NEXT_TELEMETRY_DISABLED 1
 RUN cd /apps/umami && yarn --verbose build
