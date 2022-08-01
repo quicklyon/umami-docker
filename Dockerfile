@@ -1,5 +1,4 @@
 FROM node:16-alpine AS builder
-
 ENV OS_ARCH="amd64" \
     OS_NAME="alpine-3.15"
 
@@ -21,8 +20,10 @@ RUN mkdir tmp \
 
 RUN cd /apps/umami \
     && rm -rf yarn.lock \
-    && yarn install --verbose --network-concurrency 20 --registry https://registry.npmmirror.com \
-    && yarn --verbose build
+    && yarn install --verbose --network-concurrency 20 --registry https://registry.npmmirror.com
+
+ENV NEXT_TELEMETRY_DISABLED 1
+RUN cd /apps/umami && yarn --verbose build
 
 # Production image, copy all the files and run next
 FROM node:16-alpine AS runner
