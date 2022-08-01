@@ -13,7 +13,7 @@ services:
     volumes:
       - 'db:/var/lib/mysql'
     environment:
-      MYSQL_DATABASE: umami
+      MYSQL_DB: umami
       MYSQL_USER: root
       MYSQL_PASSWORD: pass4Umami
       MYSQL_ROOT_PASSWORD: pass4Umami
@@ -33,7 +33,7 @@ services:
     environment:
       MYSQL_HOST: mysql
       MYSQL_PORT: 3306
-      MYSQL_DATABASE: umami
+      MYSQL_DB: umami
       MYSQL_USER: root
       MYSQL_PASSWORD: pass4Umami
       DATABASE_TYPE: mysql
