@@ -9,7 +9,7 @@ ARG VERSION
 ARG IS_CHINA="true"
 ENV MIRROR=${IS_CHINA}
 
-RUN install_packages libc6-compat curl tar
+RUN install_packages libc6-compat curl tar mysql-client
 
 WORKDIR /apps
 
@@ -17,9 +17,10 @@ ENV DATABASE_URL=mysql://username:mypassword@localhost:3306/mydb
 
 RUN mkdir tmp \
     && curl -sL https://github.com/umami-software/umami/archive/refs/tags/v${VERSION}.tar.gz | tar xvz -C tmp \
-    && mv tmp/umami-${VERSION} umami \
-    && cd umami \
-    && yarn install --verbose --registry https://registry.npmmirror.com\
+    && mv tmp/umami-${VERSION} umami
+
+RUN cd /apps/umami \
+    && yarn install --verbose --registry https://registry.npmmirror.com \
     && yarn --verbose build
 
 # Production image, copy all the files and run next
