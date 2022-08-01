@@ -28,9 +28,9 @@ RUN set_npm_registry && yarn install
 FROM node:16-alpine AS builder
 COPY alpine/prebuildfs /
 WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
-#COPY --from=deps /app .
-COPY . .
+#COPY --from=deps /app/node_modules ./node_modules
+COPY --from=deps /app .
+#COPY . .
 
 ARG MYSQL_HOST=localhost
 ARG MYSQL_PORT=3306
@@ -85,3 +85,5 @@ EXPOSE 3000
 ENV PORT 3000
 
 CMD ["yarn", "start-docker"]
+
+ENTRYPOINT ["/usr/bin/entrypoint.sh"]
