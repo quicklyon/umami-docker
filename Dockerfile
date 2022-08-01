@@ -19,7 +19,7 @@ RUN mkdir tmp \
     && curl -sL https://github.com/umami-software/umami/archive/refs/tags/v${VERSION}.tar.gz | tar xvz -C tmp \
     && mv tmp/umami-${VERSION} umami \
     && cd umami \
-    && yarn install --verbose --registry https://registry.npmmirror.com\
+    && yarn install --verbose --registry https://registry.npmmirror.com \
     && yarn --verbose build
 
 # Production image, copy all the files and run next
@@ -34,7 +34,7 @@ RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
 RUN yarn global add prisma --registry https://registry.npmmirror.com --verbose
-RUN yarn add npm-run-all dotenv --registry https://registry.npmmirror.com --verbose
+RUN yarn add prompts npm-run-all dotenv --registry https://registry.npmmirror.com --verbose
 
 # You only need to copy next.config.js if you are NOT using the default configuration
 COPY --from=builder /apps/umami/next.config.js .
