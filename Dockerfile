@@ -22,7 +22,7 @@ RUN mkdir tmp \
 
 #RUN git clone --branch v${VERSION} https://github.com/umami-software/umami.git /app
 #COPY package.json yarn.lock ./
-RUN set_npm_registry && yarn install
+RUN yarn config set registry https://registry.npmmirror.com  && yarn install --verbose
 
 # Rebuild the source code only when needed
 FROM node:16-alpine AS builder
