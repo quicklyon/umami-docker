@@ -20,7 +20,8 @@ RUN mkdir tmp \
     && mv tmp/umami-${VERSION} umami
 
 RUN cd /apps/umami \
-    && yarn install --verbose --registry https://registry.npmmirror.com \
+    && rm -rf yarn.lock \
+    && yarn install --verbose --network-concurrency 20 --registry https://registry.npmmirror.com \
     && yarn --verbose build
 
 # Production image, copy all the files and run next
