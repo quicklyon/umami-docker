@@ -11,12 +11,18 @@ ARG IS_CHINA="true"
 ENV MIRROR=${IS_CHINA}
 
 # Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
-RUN install_packages libc6-compat git
+RUN install_packages libc6-compat curl tar
 
 WORKDIR /app
-RUN git clone --branch v${VERSION} https://github.com/umami-software/umami.git /app
+
+RUN mkdir tmp \
+    && curl -sL https://github.com/umami-software/umami/archive/refs/tags/v${VERSION}.tar.gz | tar xvz -C tmp \
+    && mv tmp/umami-${VERSION}/* . \
+    && rm tmp -rf
+
+#RUN git clone --branch v${VERSION} https://github.com/umami-software/umami.git /app
 #COPY package.json yarn.lock ./
-RUN set_npm_registry && yarn install --frozen-lockfile
+RUN set_npm_registry && yarn install
 
 # Rebuild the source code only when needed
 FROM node:16-alpine AS builder
