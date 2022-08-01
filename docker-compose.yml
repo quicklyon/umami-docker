@@ -13,10 +13,10 @@ services:
     volumes:
       - 'db:/var/lib/mysql'
     environment:
-      MYSQL_DB: umami
-      MYSQL_USER: root
-      MYSQL_PASSWORD: pass4Umami
-      MYSQL_ROOT_PASSWORD: pass4Umami
+      - MYSQL_DB=umami
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=pass4Umami
+      - MYSQL_ROOT_PASSWORD=pass4Umami
     networks:
       - net
     restart: always

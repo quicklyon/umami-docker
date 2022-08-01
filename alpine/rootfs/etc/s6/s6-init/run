@@ -47,16 +47,6 @@ fi
 /bin/bash /usr/bin/check_files.sh &
 
 #=====================#
-#   Prepare PHP       #
-#=====================#
-PHP_CLI_INI="/etc/php/7.4/cli/php.ini"
-PHP_APACHE_INI="/etc/php/7.4/apache2/php.ini"
-
-info "Render php.ini with environment variables."
-/usr/bin/render-template /etc/php/7.4/php.ini.tpl > ${PHP_CLI_INI}
-/usr/bin/render-template /etc/php/7.4/php.ini.tpl > ${PHP_APACHE_INI}
-
-#=====================#
 #   Prepare Apache    #
 #=====================#
 SITE_CFG="/etc/apache2/sites-enabled/site.conf"

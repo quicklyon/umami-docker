@@ -22,7 +22,8 @@ RUN mkdir tmp \
 
 #RUN git clone --branch v${VERSION} https://github.com/umami-software/umami.git /app
 #COPY package.json yarn.lock ./
-RUN yarn config set registry https://registry.npmmirror.com  && yarn install --verbose
+#RUN yarn config set registry https://registry.npmmirror.com  && yarn install --verbose
+RUN yarn install --verbose --registry https://registry.npmmirror.com
 
 # Rebuild the source code only when needed
 FROM node:16-alpine AS builder
@@ -49,7 +50,7 @@ ENV DISABLE_LOGIN $DISABLE_LOGIN
 
 ENV NEXT_TELEMETRY_DISABLED 1
 
-RUN set_npm_registry && yarn build
+RUN yarn --verbose build
 
 # Production image, copy all the files and run next
 FROM node:16-alpine AS runner
@@ -63,8 +64,8 @@ RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
 RUN set_npm_registry
-RUN yarn global add prisma
-RUN yarn add npm-run-all dotenv
+RUN yarn global add prisma --registry https://registry.npmmirror.com --verbose
+RUN yarn add npm-run-all dotenv --registry https://registry.npmmirror.com --verbose
 
 # You only need to copy next.config.js if you are NOT using the default configuration
 COPY --from=builder /app/next.config.js .
@@ -86,4 +87,4 @@ ENV PORT 3000
 
 CMD ["yarn", "start-docker"]
 
-ENTRYPOINT ["/usr/bin/entrypoint.sh"]
+#ENTRYPOINT ["/usr/bin/entrypoint.sh"]
