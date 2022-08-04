@@ -36,8 +36,7 @@ ENV NEXT_TELEMETRY_DISABLED 1
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
-RUN yarn global add prisma --registry https://registry.npmmirror.com --verbose
-RUN yarn add prompts npm-run-all dotenv --registry https://registry.npmmirror.com --verbose
+RUN yarn global add prisma --registry https://registry.npmmirror.com --verbose && yarn add prompts next npm-run-all dotenv --registry https://registry.npmmirror.com --verbose && rm -rf /usr/local/share/.cache/yarn
 
 ENV OS_ARCH="amd64" \
     OS_NAME="alpine-3.15"
@@ -62,7 +61,5 @@ EXPOSE 3000
 ENV PORT 3000
 
 CMD ["yarn", "start-docker"]
-
-
 
 #ENTRYPOINT ["/usr/bin/entrypoint.sh"]
