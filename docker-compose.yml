@@ -7,9 +7,9 @@ networks:
 services:
   mysql:
     image: mysql:5.7
-    container_name: mysql
+    container_name: mysql-umami
     ports:
-      - '3306:3306'
+      - '23306:3306'
     volumes:
       - 'db:/var/lib/mysql'
     environment:
@@ -31,13 +31,13 @@ services:
     depends_on:
       - mysql
     environment:
-      MYSQL_HOST: mysql
-      MYSQL_PORT: 3306
-      MYSQL_DB: umami
-      MYSQL_USER: umami
-      MYSQL_PASSWORD: uQu3Iet9biep8ahgaiz6Aex1
-      DATABASE_TYPE: mysql
-      DATABASE_URL: mysql://umami:pass4Umami@mysql:3306/umami
+      - MYSQL_HOST=mysql
+      - MYSQL_PORT=23306
+      - MYSQL_DB=umami
+      - MYSQL_USER=umami
+      - MYSQL_PASSWORD=uQu3Iet9biep8ahgaiz6Aex1
+      - DATABASE_TYPE=mysql
+      - DATABASE_URL=mysql://umami:pass4Umami@mysql:23306/umami
     networks:
       - net
     restart: always

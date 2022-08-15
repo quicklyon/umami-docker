@@ -20,7 +20,8 @@ RUN mkdir tmp \
 
 RUN cd /apps/umami \
     && rm -rf yarn.lock \
-    && yarn install --verbose --registry https://registry.npmmirror.com
+    && docker_yarn install --verbose \
+    && docker_yarn add next --verbose
 
 ENV NEXT_TELEMETRY_DISABLED 1
 RUN cd /apps/umami && yarn --verbose build
@@ -28,15 +29,18 @@ RUN cd /apps/umami && yarn --verbose build
 # Production image, copy all the files and run next
 FROM node:16-alpine AS runner
 COPY alpine/prebuildfs /
+COPY alpine/rootfs /
 WORKDIR /apps/umami
 
 ENV NODE_ENV production
 ENV NEXT_TELEMETRY_DISABLED 1
 
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
+RUN addgroup --system --gid 1001 nodejs \
+    && adduser --system --uid 1001 nextjs
 
-RUN yarn global add prisma --registry https://registry.npmmirror.com --verbose && yarn add prompts next npm-run-all dotenv --registry https://registry.npmmirror.com --verbose && rm -rf /usr/local/share/.cache/yarn
+RUN docker_yarn global add prisma \
+    && docker_yarn add prompts npm-run-all dotenv \
+    && rm -rf /usr/local/share/.cache/yarn
 
 ENV OS_ARCH="amd64" \
     OS_NAME="alpine-3.15"
@@ -60,6 +64,4 @@ EXPOSE 3000
 
 ENV PORT 3000
 
-CMD ["yarn", "start-docker"]
-
-#ENTRYPOINT ["/usr/bin/entrypoint.sh"]
+CMD ["/bin/sh", "/usr/bin/entrypoint.sh"]

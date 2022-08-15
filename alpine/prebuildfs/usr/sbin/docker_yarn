@@ -1,4 +1,6 @@
 #!/bin/sh
+# yarn common for Dockerfile.
+
 set -e
 set -u
 
@@ -9,6 +11,9 @@ if [ "$MIRROR" = "true" ];then
     #npm config set registry http://mirrors.cloud.tencent.com/npm/ # Tencent
     npm config set registry http://registry.npmmirror.com # Ali
     #npm config set registry  https://repo.huaweicloud.com/repository/npm/ # HuaWei
+    alias yarn_cmd='yarn --verbose --registry https://registry.npmmirror.com'
+else
+    alias yarn_cmd='yarn '
 fi
 
-npm config get registry # show registry
+yarn_cmd "$@"

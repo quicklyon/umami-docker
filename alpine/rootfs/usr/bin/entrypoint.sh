@@ -9,8 +9,9 @@ set -o pipefail
 [ -n "${DEBUG:+1}" ] && set -x
 
 # Load libraries
-. /opt/easysoft/scripts/liblog.sh
+#. /opt/easysoft/scripts/liblog.sh
 . /opt/easysoft/scripts/libeasysoft.sh
+#. /opt/easysoft/scripts/libfs.sh
 
 print_welcome_page
 

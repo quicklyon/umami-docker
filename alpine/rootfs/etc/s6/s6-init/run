@@ -9,49 +9,12 @@ set -o pipefail
 [ -n "${DEBUG:+1}" ] && set -x
 
 # Load libraries
-. /opt/easysoft/scripts/liblog.sh
+#. /opt/easysoft/scripts/liblog.sh
 . /opt/easysoft/scripts/libmysql.sh
 . /opt/easysoft/scripts/libfs.sh
 
-# Load Global/Apache/PHP environment variables
+# Load Global/Environment variables
 . /etc/s6/s6-init/envs
-
-#==================================#
-# Prepare persistence directories. #
-#==================================#
-info "Prepare persistence directories."
-for pdir in "${PHP_PERSISTENCE_LIST[@]}"
-do
-    # Ensure a directory exists and,is owned by the given user
-    ensure_dir_exists "$pdir" "www-data"
-done
-
-# Make soft link for persistent directory
-if [ ! -f /data/zentao/.init_cfg ];then
-    for ldir in "${PERSISTENCE_LINK_LIST[@]}"
-    do
-        ensure_dir_exists "$(dirname $ldir)" "www-data"
-        ensure_dir_exists "${ldir/data/apps}" "www-data" "777"
-        mv "${ldir/data/apps}" "$(dirname $ldir)"
-        make_soft_link "$ldir" "${ldir/data/apps}" "www-data"
-    done
-    touch /data/zentao/.init_cfg
-else
-    for ldir in "${PERSISTENCE_LINK_LIST[@]}"
-    do
-        make_soft_link "$ldir" "${ldir/data/apps}" "www-data"
-    done
-fi
-
-# Check and delete install.php and upgrade.php
-/bin/bash /usr/bin/check_files.sh &
-
-#=====================#
-#   Prepare Apache    #
-#=====================#
-SITE_CFG="/etc/apache2/sites-enabled/site.conf"
-info "Render apache sites config with envionment variables."
-/usr/bin/render-template ${SITE_CFG}.tpl > $SITE_CFG
 
 #======================#
 # Check MySQL service  #
@@ -59,5 +22,5 @@ info "Render apache sites config with envionment variables."
 # Check and waiting mysql to be ready
 wait_for_mysql || exit 1
 
-# Initialize database
-mysql_init_db "$MYSQL_DB"
+# Start umami
+yarn start-docker
