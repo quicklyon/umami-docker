@@ -12,10 +12,9 @@ export MYSQL_PASSWORD=${MYSQL_PASSWORD:-pass4Umami}
 # ======================#
 # Persistence directory #
 #=======================#
-export PHP_PERSISTENCE_LIST=(
-"/data/php/log"
-"/data/php/session"
-"/data/zentao")
+export MYSQL_PERSISTENCE_LIST=(
+"/data/mysql"
+)
 
 #==========================================#
 # Persistence directory and make soft link #

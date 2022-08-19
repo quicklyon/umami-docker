@@ -34,6 +34,8 @@ WORKDIR /apps/umami
 
 ENV NODE_ENV production
 ENV NEXT_TELEMETRY_DISABLED 1
+ENV APP_VERSION=${VERSION}
+ENV EASYSOFT_APP_NAME="Umami $APP_VERSION"
 
 RUN addgroup --system --gid 1001 nodejs \
     && adduser --system --uid 1001 nextjs
@@ -44,7 +46,7 @@ RUN docker_yarn global add prisma \
 
 ENV OS_ARCH="amd64" \
     OS_NAME="alpine-3.15"
-RUN install_packages mysql-client
+RUN install_packages mysql-client bash && rm /bin/sh && ln -s /bin/bash /bin/sh
 
 # You only need to copy next.config.js if you are NOT using the default configuration
 COPY --from=builder /apps/umami/next.config.js .
@@ -64,4 +66,5 @@ EXPOSE 3000
 
 ENV PORT 3000
 
+#CMD ["yarn", "start-docker"]
 CMD ["/bin/sh", "/usr/bin/entrypoint.sh"]

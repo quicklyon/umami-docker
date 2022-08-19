@@ -15,9 +15,6 @@ set -o pipefail
 
 print_welcome_page
 
-# Enable apache
-ln -s /etc/s6/s6-available/apache /etc/s6/s6-enable/01-apache
-
 if [ $# -gt 0 ]; then
     exec "$@"
 else
