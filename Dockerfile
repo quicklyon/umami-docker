@@ -46,7 +46,7 @@ RUN docker_yarn global add prisma \
 
 ENV OS_ARCH="amd64" \
     OS_NAME="alpine-3.15"
-RUN install_packages mysql-client bash && rm /bin/sh && ln -s /bin/bash /bin/sh
+RUN install_packages netcat-openbsd mysql-client bash && rm /bin/sh && ln -s /bin/bash /bin/sh
 
 # You only need to copy next.config.js if you are NOT using the default configuration
 COPY --from=builder /apps/umami/next.config.js .

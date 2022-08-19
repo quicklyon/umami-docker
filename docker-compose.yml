@@ -32,6 +32,8 @@ services:
       - mysql
     environment:
       - MYSQL_HOST=mysql
+      - DEBUG=1
+      - EASYSOFT_DEBUG=true
       - MYSQL_PORT=3306
       - MYSQL_DB=umami
       - MYSQL_USER=umami
