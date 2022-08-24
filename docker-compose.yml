@@ -9,7 +9,7 @@ services:
     image: mysql:5.7
     container_name: mysql-umami
     ports:
-      - '3306:3306'
+      - '23306:3306'
     volumes:
       - '/data/mysql:/var/lib/mysql'
     environment:
@@ -32,8 +32,6 @@ services:
       - mysql
     environment:
       - MYSQL_HOST=mysql
-      - DEBUG=1
-      - EASYSOFT_DEBUG=true
       - MYSQL_PORT=3306
       - MYSQL_DB=umami
       - MYSQL_USER=umami

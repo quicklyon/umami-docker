@@ -29,8 +29,10 @@ RUN cd /apps/umami && yarn --verbose build
 # Production image, copy all the files and run next
 FROM node:16-alpine AS runner
 COPY alpine/prebuildfs /
-COPY alpine/rootfs /
 WORKDIR /apps/umami
+
+ARG IS_CHINA="true"
+ENV MIRROR=${IS_CHINA}
 
 ENV NODE_ENV production
 ENV NEXT_TELEMETRY_DISABLED 1
@@ -46,7 +48,7 @@ RUN docker_yarn global add prisma \
 
 ENV OS_ARCH="amd64" \
     OS_NAME="alpine-3.15"
-RUN install_packages netcat-openbsd mysql-client bash && rm /bin/sh && ln -s /bin/bash /bin/sh
+RUN install_packages netcat-openbsd mysql-client bash s6 && rm /bin/sh && ln -s /bin/bash /bin/sh
 
 # You only need to copy next.config.js if you are NOT using the default configuration
 COPY --from=builder /apps/umami/next.config.js .
@@ -59,12 +61,15 @@ COPY --from=builder /apps/umami/scripts ./scripts
 # https://nextjs.org/docs/advanced-features/output-file-tracing
 COPY --from=builder --chown=nextjs:nodejs /apps/umami/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /apps/umami/.next/static ./.next/static
+COPY alpine/rootfs /
 
 USER nextjs
 
 EXPOSE 3000
 
 ENV PORT 3000
+
+USER root
 
 #CMD ["yarn", "start-docker"]
 CMD ["/bin/sh", "/usr/bin/entrypoint.sh"]

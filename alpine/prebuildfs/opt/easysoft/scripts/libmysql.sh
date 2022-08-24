@@ -9,7 +9,7 @@
 . /opt/easysoft/scripts/libos.sh
 
 ########################
-# Check and waiting MySQL to be ready. 
+# Check and waiting MySQL to be ready.
 # Globals:
 #   MAXWAIT
 #   MYSQL_HOST
@@ -34,6 +34,8 @@ wait_for_mysql() {
         fi
 
         warn "Waiting MySQL $i seconds"
+        warn $MYSQL_HOST
+        warn $MYSQL_PORT
         sleep 1
 
         if [ "$i" == "$retries" ]; then
@@ -65,7 +67,7 @@ mysql_init_db() {
     local command="/usr/bin/mysql"
 
     args+=("--execute=CREATE DATABASE IF NOT EXISTS $init_db;")
-    
+
     info "Check $EASYSOFT_APP_NAME database."
     debug_execute "$command" "${args[@]}" || return 1
 }
@@ -80,7 +82,7 @@ mysql_init_db() {
 #   MYSQL_DB
 # Arguments:
 #   $1 - app database name
-#   $2 - mysql dump file(*.sql) 
+#   $2 - mysql dump file(*.sql)
 # Returns:
 #   0 if import succeed,1 otherwise
 #########################
@@ -96,6 +98,6 @@ mysql_import_to_db() {
     else
         error "The specified import file: $sql_file does not exist"
         return 1
-    fi 
+    fi
 
 }
