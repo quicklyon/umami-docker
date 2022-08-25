@@ -58,10 +58,7 @@ umami官网：[https://umami.is/](https://umami.is/)
 
 由于版本比较多,这里只列出最新的5个版本,更详细的版本列表请参考:[可用版本列表](https://hub.docker.com/r/easysoft/umami/tags/)
 
-<!-- 这里是应用的【Tag】信息，通过命令维护，详情参考：https://github.com/quicklyon/doc-toolkit -->
-- [latest](https://github.com/umami-software/umami/releases/tags)
-- [1.36.1](https://github.com/umami-software/umami/releases/tag/v1.36.1)
-- [1.36.0](https://github.com/umami-software/umami/releases/tag/v1.36.0)
+
 
 ## 三、获取镜像
 
