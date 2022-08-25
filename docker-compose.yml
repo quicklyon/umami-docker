@@ -9,7 +9,7 @@ services:
     image: mysql:5.7
     container_name: mysql-umami
     ports:
-      - '23306:3306'
+      - '3306:3306'
     volumes:
       - '/data/mysql:/var/lib/mysql'
     environment:
