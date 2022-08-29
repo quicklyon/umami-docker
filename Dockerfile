@@ -15,7 +15,7 @@ WORKDIR /apps
 ENV DATABASE_URL=mysql://username:mypassword@localhost:3306/mydb
 
 RUN mkdir tmp \
-    && curl -sL https://github.com/umami-software/umami/archive/refs/tags/v${VERSION}.tar.gz | tar xvz -C /apps/tmp \
+    && curl -sL https://github.com/umami-software/umami/archive/refs/tags/v${VERSION}.tar.gz | tar -xvz -C /apps/tmp \
     && mv /apps/tmp/umami-${VERSION} /apps/umami
 
 RUN cd /apps/umami \
