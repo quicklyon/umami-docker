@@ -13,7 +13,7 @@ build: ## 构建镜像
 		-t hub.qucheng.com/app/$(APP_NAME):$(TAG)-$(BUILD_DATE) -f Dockerfile .
 
 build-public: ## 国外构建镜像
-	docker build --build-arg VERSION=$(VERSION) --build-arg IS_CHINA="false" -t easysoft/$(APP_NAME):$(TAG) -f Dockerfile .
+	docker build --build-arg VERSION=$(TAG) --build-arg IS_CHINA="false" -t easysoft/$(APP_NAME):$(TAG) -f Dockerfile .
 	docker tag easysoft/$(APP_NAME):$(TAG) easysoft/$(APP_NAME)
 
 push: ## push 镜像到 hub.qucheng.com
