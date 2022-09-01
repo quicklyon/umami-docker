@@ -9,15 +9,3 @@ export MYSQL_DB=${MYSQL_DB:-umami}
 export MYSQL_USER=${MYSQL_USER:-root}
 export MYSQL_PASSWORD=${MYSQL_PASSWORD:-pass4Umami}
 
-# ======================#
-# Persistence directory #
-#=======================#
-export MYSQL_PERSISTENCE_LIST=(
-"/data/mysql"
-)
-
-#==========================================#
-# Persistence directory and make soft link #
-#==========================================#
-export PERSISTENCE_LINK_LIST=(
-)

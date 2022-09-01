@@ -34,8 +34,6 @@ wait_for_mysql() {
         fi
 
         warn "Waiting MySQL $i seconds"
-        warn $MYSQL_HOST
-        warn $MYSQL_PORT
         sleep 1
 
         if [ "$i" == "$retries" ]; then

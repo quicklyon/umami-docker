@@ -71,5 +71,4 @@ ENV PORT 3000
 
 USER root
 
-#CMD ["yarn", "start-docker"]
 CMD ["/bin/sh", "/usr/bin/entrypoint.sh"]
