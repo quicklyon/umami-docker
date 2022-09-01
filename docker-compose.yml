@@ -35,9 +35,8 @@ services:
       - MYSQL_PORT=3306
       - MYSQL_DB=umami
       - MYSQL_USER=umami
-      - MYSQL_PASSWORD=uQu3Iet9biep8ahgaiz6Aex1
+      - MYSQL_PASSWORD=pass4Umami
       - DATABASE_TYPE=mysql
-      - DATABASE_URL=mysql://umami:pass4Umami@mysql:3306/umami
     networks:
       - net
     restart: always
