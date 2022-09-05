@@ -30,6 +30,9 @@ push-sync-tcr: push-public ## 同步到腾讯镜像仓库
 run: ## 运行
 	export TAG=$(TAG)-$(BUILD_DATE) ;docker-compose -f docker-compose.yml up -d
 
+smoke-test: ## 冒烟测试新版
+	hack/make-rules/smoke-test.sh "$(APP_NAME)" "run"
+
 ps: ## 运行状态
 	docker-compose -f docker-compose.yml ps
 
